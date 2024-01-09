@@ -8,7 +8,6 @@ def index(request):
 
     context = {'title': 'home',
                'content': 'Магазин мебели HOME',
-               'categories': categories,
                }
     return render(request, 'hub/index.html', context)
 
