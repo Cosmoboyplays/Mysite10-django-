@@ -11,11 +11,14 @@
             Фильтры
         </button>
 
-        <form action="{% url 'catalog:index' slug_url %}" method="get" class="dropdown-menu bg-dark" data-bs-theme="dark">
+        <form action="{% if request.GET.q %} {% url 'catalog:search' %} {% else %} {% url 'catalog:index' slug_url %}{% endif %}" method="get" class="dropdown-menu bg-dark" data-bs-theme="dark">
             <div class="form-check text-white mx-3">
                 <input class="form-check-input" type="checkbox" name="on_sale" id="flexCheckDefault" value="on"
                        {% if request.GET.on_sale == 'on' %} checked {% endif %}>
-<!--                <input type="hidden" name="q" value="request.GET.q">-->
+                <!--скрытый тег hidden-->
+                {% if request.GET.q %}
+                    <input type="hidden" name="q" value="{{ request.GET.q }}">
+                {% endif %}
                 <label class="form-check-label" for="flexCheckDefault">
                     Товары по акции
                 </label>
@@ -60,7 +63,15 @@
                 {% endif %}
                 <div class="card-body">
                     <a href="{% url 'catalog:product' product.slug %}">
-                        <p class="card-title">{{ product.name }}</p>
+                        <p class="card-title">
+                            {% autoescape off %}
+                            {% if product.headline %}
+                            {{ product.headline }}
+                            {% else %}
+                            {{ product.name }}
+                            {% endif %}
+                            {% endautoescape %}
+                        </p>
                     </a>
                     <p class="card-text ">{{ product.description|truncatewords:4}}</p>
                           <!-- product.display_id метод класса Product -->

@@ -10,6 +10,7 @@ class Categories(models.Model):
         verbose_name = 'Категорию'
         verbose_name_plural = 'Категории'
 
+
     def __str__(self):
         return self.name
 
@@ -40,5 +41,4 @@ class Products(models.Model):
     def sell_price(self):
         if self.discount:
             return round(self.price - self.price*self.discount/100, 2)
-
         return self.price
