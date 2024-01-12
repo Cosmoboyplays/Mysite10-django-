@@ -6,10 +6,9 @@ class Categories(models.Model):
     slug = models.SlugField(max_length=200, unique=True, blank=True, null=True, verbose_name='Url-slug')
 
     class Meta():
-        db_table = "Category"
+        db_table = "category"
         verbose_name = 'Категорию'
         verbose_name_plural = 'Категории'
-
 
     def __str__(self):
         return self.name

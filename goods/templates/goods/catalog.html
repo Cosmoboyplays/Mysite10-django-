@@ -1,4 +1,4 @@
-{% extends "hub/base.html" %}
+{% extends "base.html" %}
 {% load static %}
 {% load goods_tags %}
 
@@ -73,7 +73,15 @@
                             {% endautoescape %}
                         </p>
                     </a>
-                    <p class="card-text ">{{ product.description|truncatewords:4}}</p>
+                    <p class="card-text ">
+                            {% autoescape off %}
+                                {% if product.bodyline %}
+                                    {{ product.bodyline|truncatewords:4 }}
+                                {% else %}
+                                    {{ product.description|truncatewords:4 }}
+                                {% endif %}
+                            {% endautoescape %}
+                    </p>
                           <!-- product.display_id метод класса Product -->
                     <p class="product_id">id: {{ product.display_id}}</p>
 

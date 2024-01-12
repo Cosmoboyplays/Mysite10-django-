@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     'hub',
     'goods',
+    'users',
 ]
 
 INTERNAL_IPS = [
@@ -69,7 +70,7 @@ ROOT_URLCONF = 'app.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
